@@ -28,8 +28,9 @@ class Area extends React.Component {
       bars: bars,
       length: bars.length,
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   generateArray(){
     var bars = [];
     for(var i = 1; i < numBars; i++){
@@ -40,9 +41,20 @@ class Area extends React.Component {
     }
     this.setState({bars: bars, length:bars.length});
   }
-  handleChange(){
-    numBars = 100;
+  handleChange(event) {
+    this.setState({length: event.target.value});
+  }
+  handleSubmit(event) {
+    max = 0;
+    numBars = (this.state.length);
+    numBars++;
+    if(this.state.length > 100);
+    this.setState({length: 100});  
+    if(numBars > 100){
+      numBars = 101;
+    }
     this.generateArray();
+    event.preventDefault();
   }
   renderBar(i) {
     return (
@@ -70,6 +82,10 @@ class Area extends React.Component {
         <div>
           <button onClick={()=> this.generateArray()}>New Array</button>
           <button onClick={()=> this.handleChange()}>New Size</button>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" value={this.state.length} onChange={this.handleChange} name="size" />
+            <input type="submit" value="Submit" />
+          </form>
         </div>
       </div>
     )
