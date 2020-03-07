@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
 
-var numBars = 10;
+var numBars = 20;
+var max = 0;
 function Bar(props) {
   var height = {
-    height: props.value,
+    height: props.value/max*500,
+    width: 600/numBars,
+    bottom: -500 + props.value/max*500,
   }
   return (
     <div className = {'bar'} style={height}></div>
@@ -16,7 +19,10 @@ class Area extends React.Component {
     super(props);
     var bars = [];
     for(var i = 1; i < numBars; i++){
-      bars.push(i*10);
+      var num = Math.floor(Math.random() * Math.floor(numBars*10));
+      bars.push(num);
+      if(num > max)
+        max = num;
     }
     this.state = {
       bars: bars,
@@ -24,6 +30,20 @@ class Area extends React.Component {
     };
   }
 
+  generateArray(){
+    var bars = [];
+    for(var i = 1; i < numBars; i++){
+      var num = Math.floor(Math.random() * Math.floor(numBars*10));
+      bars.push(num);
+      if(num > max)
+        max = num;
+    }
+    this.setState({bars: bars, length:bars.length});
+  }
+  handleChange(){
+    numBars = 100;
+    this.generateArray();
+  }
   renderBar(i) {
     return (
       <Bar
@@ -43,8 +63,14 @@ class Area extends React.Component {
 
 
     return (
-      <div className="sortBoard">
-        {sorts}
+      <div>
+        <div className="sortBoard">
+          {sorts}
+        </div>
+        <div>
+          <button onClick={()=> this.generateArray()}>New Array</button>
+          <button onClick={()=> this.handleChange()}>New Size</button>
+        </div>
       </div>
     )
   }

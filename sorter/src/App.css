@@ -9,7 +9,6 @@
 }
 .bar {
   position: relative;
-/*  bottom:calc(-100% + 40px); */
   width: 10px;
   margin: 0 1px 0 1px;
   border-radius: 5px 5px 0px 0px;
@@ -17,6 +16,10 @@
   float: left;
 }
 .sortBoard {
+  margin-top: 50px;
+  position: absolute; 
+  left: 50%;
+  transform: translateX(-50%);
+  top: 25%;
   width: auto;
-  height: 100vh;
 }
