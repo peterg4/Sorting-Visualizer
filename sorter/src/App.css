@@ -23,3 +23,9 @@
   top: 25%;
   width: auto;
 }
+.red {
+  background-color: forestgreen!important;
+}
+.confirmed {
+  background-color: indigo;
+}

@@ -10,7 +10,7 @@ function Bar(props) {
     bottom: -500 + props.value/max*500,
   }
   return (
-    <div className = {'bar'} style={height}></div>
+    <div id={props.index} className = {'bar'} style={height}></div>
   );
 }
 
@@ -57,36 +57,52 @@ class Area extends React.Component {
     this.generateArray();
     event.preventDefault();
   }
+  confirmSort() {
+    var i = 0;
+    var confirm = setInterval(() => {
+      var arr = this.state.bars.slice();
+      document.getElementById(i).className = 'bar confirmed'
+      i++;
+      this.setState({bars: arr});
+      if( i >= this.state.length){
+        clearInterval(confirm);
+      }
+    }, 700/this.state.length);
+  }
   bubbleSort() {
     var swapped = false;
     var i = 0;
     var check_len = this.state.check_len;
     var sort = setInterval(() => {
       var arr = this.state.bars.slice();
+      document.getElementById(i+1).className ="bar red";
       if(arr[i] > arr[i+1]) {
         var t = arr[i];
         arr[i] = arr[i+1];
         arr[i+1] = t;
         swapped = true;
       }
+      document.getElementById(i).className = 'bar';
       i++;
       this.setState({bars: arr});
-      if(i > check_len) {
+      if(i >= check_len-1) {
         check_len--;
         this.setState({check_len: check_len});
         clearInterval(sort);
         console.log(swapped);
         if(swapped) {
           this.bubbleSort();
+        } else {
+          this.confirmSort();
         }
       }
-    }, 5)
-
+    }, 100/this.state.length)
   }
   renderBar(i) {
     return (
       <Bar
         value = {this.state.bars[i]}
+        index = {i}
       // bar attributes added here
       />
     );
