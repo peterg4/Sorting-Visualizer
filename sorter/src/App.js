@@ -71,7 +71,9 @@ class Area extends React.Component {
     var i = 1;
     var swapped = false;
     var sort = setInterval(() => {
+      this.clearArray();
       var arr = this.state.bars.slice();
+      document.getElementById(i).className = 'bar red';
       var j = i;
       var low = i-1;
       while(arr[j] < arr[low]) {
