@@ -97,6 +97,31 @@ class Area extends React.Component {
   }
   selectionSort(){
     //contiunally find the min and place at "beginning"
+    var i = 0;
+    var low = 0;
+    var sort = setInterval(() => {
+      var arr = this.state.bars.slice();
+      var min = 1000;
+      var min_in;
+      for(var j = low; j < arr.length; j++) {
+       if(arr[j] < min) {
+        min = arr[j]
+        min_in = j;
+       }
+      }
+      var t = arr[min_in];
+      arr[min_in] = arr[low];
+      arr[low] = t;
+     
+      document.getElementById(low).className ="bar red";
+      i++;
+      low++;
+      this.setState({bars: arr});
+      if(i >= arr.length) {
+        clearInterval(sort);
+        this.confirmSort();
+      }
+    }, 5000/this.state.length)
   }
   mergeSort(){
     //decimate then merge
