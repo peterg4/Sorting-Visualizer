@@ -126,9 +126,48 @@ class Area extends React.Component {
   mergeSort(){
     //decimate then merge
   }
-  quickSort(){
-    //split and partition
+  partition(arr, low, high) {
+    var x = arr[high];
+    var i = (low-1)
+    for(var j = low; j < high; j++) {
+      if(arr[j] <= x) {
+        i++;
+        var t = arr[j];
+        arr[j] = arr[i];
+        arr[i] = t;
+      }
+    }
+    var t = arr[i+1];
+    arr[i+1] = arr[high];
+    arr[high] = t;
+    return [(i+1), arr];
   }
+  quickSort(low, high){
+    var stack = [];
+    stack.push(low);
+    stack.push(high);
+    var sort = setInterval(() => {
+      var arr = this.state.bars.slice();
+      high = stack.pop();
+      low = stack.pop();
+      var res = this.partition(arr, low, high);
+      var p = res[0];
+      var bars = res[1];
+      if(p - 1 > low) {
+        stack.push(low);
+        stack.push(p-1);
+      }
+      if (p + 1 < high) { 
+        stack.push(p + 1); 
+        stack.push(high); 
+      }
+      this.setState({bars: bars});
+      if(stack.length <= 0) {
+        clearInterval(sort);
+        this.confirmSort();
+      }
+  }, 100)
+}
   heapSort(){
     //heapify until done
   }
@@ -184,7 +223,7 @@ class Area extends React.Component {
           <button onClick={()=> this.bubbleSort()}>Bubble Sort</button>
           <button onClick={()=> this.insertionSort()}>Insertion Sort</button>
           <button onClick={()=> this.selectionSort()}>Selection Sort</button>
-          <button onClick={()=> this.quickSort()}>Quick Sort</button>
+          <button onClick={()=> this.quickSort(0, this.state.length-1)}>Quick Sort</button>
           <button onClick={()=> this.heapSort()}>Heap Sort</button>
           <button onClick={()=> this.mergeSort()}>Merge Sort</button>
           
