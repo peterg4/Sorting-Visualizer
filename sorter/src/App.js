@@ -68,6 +68,30 @@ class Area extends React.Component {
   }
   insertionSort(){
     //at each element look back through sorted array and place in correct position
+    var i = 1;
+    var swapped = false;
+    var sort = setInterval(() => {
+      var arr = this.state.bars.slice();
+      var j = i;
+      var low = i-1;
+      while(arr[j] < arr[low]) {
+        //j--;
+        low--;
+      }
+      console.log(low + ' break');
+      var t = arr[i];
+      arr.splice(low+1,0,t);
+      arr.splice(i+1,1);
+
+      
+      i++;
+      this.setState({bars: arr});
+      document.getElementById(low+1).className = 'bar red';
+      if(i >= this.state.length){
+        this.confirmSort();
+        clearInterval(sort);
+      }
+    }, 5000/this.state.length)
   }
   selectionSort(){
     //contiunally find the min and place at "beginning"
