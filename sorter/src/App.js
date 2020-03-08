@@ -129,6 +129,7 @@ class Area extends React.Component {
   partition(arr, low, high) {
     var x = arr[high];
     var i = (low-1)
+    var j = low;
     for(var j = low; j < high; j++) {
       if(arr[j] <= x) {
         i++;
@@ -147,9 +148,12 @@ class Area extends React.Component {
     stack.push(low);
     stack.push(high);
     var sort = setInterval(() => {
+      this.clearArray();
       var arr = this.state.bars.slice();
       high = stack.pop();
       low = stack.pop();
+      document.getElementById(low).className = 'bar red';
+      document.getElementById(high).className = 'bar red';
       var res = this.partition(arr, low, high);
       var p = res[0];
       var bars = res[1];
@@ -166,7 +170,7 @@ class Area extends React.Component {
         clearInterval(sort);
         this.confirmSort();
       }
-  }, 100)
+  }, 5000/this.state.length)
 }
   heapSort(){
     //heapify until done
