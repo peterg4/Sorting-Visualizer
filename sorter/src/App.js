@@ -53,7 +53,6 @@ class Area extends React.Component {
     numBars++;
     max = 0;
     this.generateArray();
-    console.log(this.state.length);
   }
   confirmSort() {
     var i = 0;
@@ -66,6 +65,21 @@ class Area extends React.Component {
         clearInterval(confirm);
       }
     }, 700/this.state.length);
+  }
+  insertionSort(){
+    //at each element look back through sorted array and place in correct position
+  }
+  selectionSort(){
+    //contiunally find the min and place at "beginning"
+  }
+  mergeSort(){
+    //decimate then merge
+  }
+  quickSort(){
+    //split and partition
+  }
+  heapSort(){
+    //heapify until done
   }
   bubbleSort() {
     var swapped = false;
@@ -104,16 +118,11 @@ class Area extends React.Component {
       />
     );
   }
-
-
   render() {
     const sorts = []
     for(var i = 0; i < numBars-1; i++) {
       sorts.push(this.renderBar(i));
     }
-
-
-
     return (
       <div>
         <div className="sortBoard">
@@ -122,22 +131,22 @@ class Area extends React.Component {
         <div>
           <button onClick={()=> this.generateArray()}>New Array</button>
           <button onClick={()=> this.bubbleSort()}>Bubble Sort</button>
-          <button onClick={()=> this.clearArray()}>Clear</button>
+          <button onClick={()=> this.insertionSort()}>Insertion Sort</button>
+          <button onClick={()=> this.selectionSort()}>Selection Sort</button>
+          <button onClick={()=> this.quickSort()}>Quick Sort</button>
+          <button onClick={()=> this.heapSort()}>Heap Sort</button>
+          <button onClick={()=> this.mergeSort()}>Merge Sort</button>
+          
           <form onSubmit={this.handleSubmit}>
-            <input type="range" min="1" max="100" step="1" value={this.state.length} onChange={this.handleChange} name="size" />
+            <input className="slider" type="range" min="2" max="100" step="1" value={this.state.length} onChange={this.handleChange} name="size" />
           </form>
         </div>
       </div>
     )
   }
-
 }
-
 class App extends React.Component {
   render() {
-
-
-
     return (
       <div className="App">
         <header className="App-header">
