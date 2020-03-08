@@ -32,6 +32,11 @@ class Area extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  clearArray() {
+    for(var i = 0; i < this.state.length; i++){
+      document.getElementById(i).className='bar';
+    }
+  }
   generateArray(){
     var bars = [];
     for(var i = 1; i < numBars; i++){
@@ -43,9 +48,12 @@ class Area extends React.Component {
     this.setState({bars: bars, length: bars.length, check_len: bars.length});
   }
   handleChange(event) {
+    if(event.target.value > 100)
+      event.target.value = 100;
     this.setState({length: event.target.value});
   }
   handleSubmit(event) {
+
     max = 0;
     numBars = (this.state.length);
     numBars++;
@@ -56,6 +64,7 @@ class Area extends React.Component {
     }
     this.generateArray();
     event.preventDefault();
+    
   }
   confirmSort() {
     var i = 0;
@@ -103,7 +112,6 @@ class Area extends React.Component {
       <Bar
         value = {this.state.bars[i]}
         index = {i}
-      // bar attributes added here
       />
     );
   }
@@ -125,6 +133,7 @@ class Area extends React.Component {
         <div>
           <button onClick={()=> this.generateArray()}>New Array</button>
           <button onClick={()=> this.bubbleSort()}>Bubble Sort</button>
+          <button onClick={()=> this.clearArray()}>Clear</button>
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.length} onChange={this.handleChange} name="size" />
             <input type="submit" value="Submit" />
