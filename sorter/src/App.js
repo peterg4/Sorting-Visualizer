@@ -30,7 +30,6 @@ class Area extends React.Component {
       check_len: bars.length
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   clearArray() {
     for(var i = 0; i < this.state.length; i++){
@@ -46,25 +45,15 @@ class Area extends React.Component {
         max = num;
     }
     this.setState({bars: bars, length: bars.length, check_len: bars.length});
+    this.clearArray();
   }
   handleChange(event) {
-    if(event.target.value > 100)
-      event.target.value = 100;
     this.setState({length: event.target.value});
-  }
-  handleSubmit(event) {
-
-    max = 0;
-    numBars = (this.state.length);
+    numBars = event.target.value;
     numBars++;
-    if(this.state.length > 100);
-    this.setState({length: 100});  
-    if(numBars > 100){
-      numBars = 101;
-    }
+    max = 0;
     this.generateArray();
-    event.preventDefault();
-    
+    console.log(this.state.length);
   }
   confirmSort() {
     var i = 0;
@@ -135,8 +124,7 @@ class Area extends React.Component {
           <button onClick={()=> this.bubbleSort()}>Bubble Sort</button>
           <button onClick={()=> this.clearArray()}>Clear</button>
           <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.length} onChange={this.handleChange} name="size" />
-            <input type="submit" value="Submit" />
+            <input type="range" min="1" max="100" step="1" value={this.state.length} onChange={this.handleChange} name="size" />
           </form>
         </div>
       </div>
