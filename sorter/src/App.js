@@ -170,10 +170,48 @@ class Area extends React.Component {
         clearInterval(sort);
         this.confirmSort();
       }
-  }, 5000/this.state.length)
-}
+    }, 5000/this.state.length)
+  }
+  makeHeap(arr, n, i) {
+    var largest = i;
+    var l = 2*i + 1;
+    var r = 2*i + 2;
+    if(l < n && arr[l] > arr[largest])
+      largest = l;
+    if(r < n && arr[r] > arr[largest])
+      largest = r;
+    if(largest != i) {
+      var t = arr[i];
+      arr[i] = arr[largest];
+      arr[largest] = t;
+      this.setState({bars: arr});
+      this.makeHeap(arr, n, largest);
+    }
+  }
   heapSort(){
-    //heapify until done
+    var i = parseInt(this.state.length/2)-1;
+    var heap = setInterval(() => {
+      var arr = this.state.bars.slice();
+      this.makeHeap(arr,arr.length,i);
+      i--;
+      if(i < 0){
+        clearInterval(heap);
+      }
+    }, 10)
+ /*   i = this.state.length-1;
+    var sort = setInterval(() => {
+      var arr = this.state.bars.slice();
+      var t = arr[0];
+      arr[0] = arr[i];
+      arr[i] = t;
+      this.makeHeap(arr, i, 0);
+      this.setState({bars: arr});
+      i--;
+      if(i < 0) {
+        clearInterval(sort);
+        this.confirmSort();
+      }
+    }, 100)*/
   }
   bubbleSort() {
     var swapped = false;
