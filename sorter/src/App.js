@@ -100,6 +100,7 @@ class Area extends React.Component {
     var i = 0;
     var low = 0;
     var sort = setInterval(() => {
+      this.clearArray();
       var arr = this.state.bars.slice();
       var min = 1000;
       var min_in;
@@ -109,6 +110,7 @@ class Area extends React.Component {
         min_in = j;
        }
       }
+      document.getElementById(min_in).className ="bar red";
       var t = arr[min_in];
       arr[min_in] = arr[low];
       arr[low] = t;
@@ -172,46 +174,52 @@ class Area extends React.Component {
       }
     }, 5000/this.state.length)
   }
-  makeHeap(arr, n, i) {
-    var largest = i;
-    var l = 2*i + 1;
-    var r = 2*i + 2;
-    if(l < n && arr[l] > arr[largest])
-      largest = l;
-    if(r < n && arr[r] > arr[largest])
-      largest = r;
-    if(largest != i) {
-      var t = arr[i];
-      arr[i] = arr[largest];
-      arr[largest] = t;
-      this.setState({bars: arr});
-      this.makeHeap(arr, n, largest);
+  makeHeap(arr, n) {
+    for(var i = 1; i < n; i++) {
+      if(arr[i] > arr[parseInt((i-1)/2)]){
+        var j = i;
+        while(arr[j] > arr[parseInt((j-1)/2)]) {
+          var t = arr[j];
+          arr[j] = arr[parseInt((j-1)/2)];
+          arr[parseInt((j-1)/2)] = t;
+          j = parseInt((j-1)/2);
+        }
+      }
     }
+    this.setState({bars: arr});
   }
-  heapSort(){
-    var i = parseInt(this.state.length/2)-1;
-    var heap = setInterval(() => {
-      var arr = this.state.bars.slice();
-      this.makeHeap(arr,arr.length,i);
+  heapSort() {
+    var arr = this.state.bars.slice();
+    var len = arr.length;
+    this.makeHeap(arr, len);
+    var i = len-1;
+    var sort = setInterval(() => {
+      document.getElementById(i).className = 'bar red';
+      var t = arr[i];
+      arr[i] = arr[0];
+      arr[0] = t;
+      document.getElementById(0).className = 'bar red';
+      var j = 0;
+      var index; 
+      do { 
+        index = (2 * j + 1); 
+        if (arr[index] < arr[index + 1] && index < (i - 1)) { 
+          index++; 
+        }
+        if (arr[j] < arr[index] && index < i) {
+          var t = arr[j];
+          arr[j] = arr[index];
+          arr[index] = t; 
+        }
+        j = index; 
+      } while (index < i);
+      this.setState({bars: arr});
       i--;
       if(i < 0){
-        clearInterval(heap);
-      }
-    }, 10)
- /*   i = this.state.length-1;
-    var sort = setInterval(() => {
-      var arr = this.state.bars.slice();
-      var t = arr[0];
-      arr[0] = arr[i];
-      arr[i] = t;
-      this.makeHeap(arr, i, 0);
-      this.setState({bars: arr});
-      i--;
-      if(i < 0) {
         clearInterval(sort);
         this.confirmSort();
       }
-    }, 100)*/
+    }, 100)
   }
   bubbleSort() {
     var swapped = false;
