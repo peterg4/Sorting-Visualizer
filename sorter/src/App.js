@@ -80,7 +80,6 @@ class Area extends React.Component {
         //j--;
         low--;
       }
-      console.log(low + ' break');
       var t = arr[i];
       arr.splice(low+1,0,t);
       arr.splice(i+1,1);
@@ -125,7 +124,6 @@ class Area extends React.Component {
     }, 5000/this.state.length)
   }
   merge(arr, l, m, r) {
-    console.log(arr, l ,m ,r);
     var i,j,k;
     var n1 = m-l+1;
     var n2 = r-m;
@@ -137,7 +135,6 @@ class Area extends React.Component {
     for(var j = 0; j < n2; j++) {
       R[j] = arr[m+1+j];
     }
-    console.log(L, R);
     i=0;
     j=0;
     k=l;
@@ -161,7 +158,6 @@ class Area extends React.Component {
       j++;
       k++;
     }
-    console.log(arr);
     return arr;
   }
   mergeSort(){
@@ -172,21 +168,18 @@ class Area extends React.Component {
     curr_size = 1;
     var arr = this.state.bars.slice();
     var search = setInterval(() => {
-      console.log('teeeeee\n');
       for(left_start=0; left_start<n-1;left_start+=2*curr_size) {
         var mid = Math.min(left_start + curr_size-1,n-1);
         var right_end = Math.min(left_start+(2*curr_size)-1,n-1);
         arr = this.merge(arr,left_start,mid,right_end);
-        console.log('_______________________________________');
       }
       this.setState({bars: arr});
       curr_size*=2;
       if(curr_size > n-1) {
-        console.log('tes');
         clearInterval(search);
         this.confirmSort();
       }
-    }, 10000/this.state.length)
+    }, (10000/n)*curr_size)
   }
   partition(arr, low, high) {
     var x = arr[high];
@@ -301,7 +294,6 @@ class Area extends React.Component {
         check_len--;
         this.setState({check_len: check_len});
         clearInterval(sort);
-        console.log(swapped);
         if(swapped) {
           this.bubbleSort();
         } else {
