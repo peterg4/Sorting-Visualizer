@@ -47,9 +47,9 @@ button:focus{
   left: 50%;
   transform: translateX(-50%);
   top: 25%;
-  width: auto;
+  width: fit-content;
 }
-.red {
+.red { /*always have descriptive variables*/
   background-color: forestgreen!important;
 }
 .confirmed {
