@@ -50,7 +50,6 @@ class Area extends React.Component {
     this.clearArray();
   }
   handleChange(event) {
-    console.log(this.state.isRunning);
     if(this.state.isRunning) {
       return;
     }
@@ -75,7 +74,6 @@ class Area extends React.Component {
   }
   async insertionSort(){
     await this.setState({isRunning: true});
-    console.log(this.state.isRunning);
     var i = 1;
     var swapped = false;
     var sort = setInterval(() => {
@@ -104,7 +102,6 @@ class Area extends React.Component {
   }
   async selectionSort(){
     await this.setState({isRunning: true});
-    console.log(this.state.isRunning);
     var i = 0;
     var low = 0;
     var sort = setInterval(() => {
@@ -170,7 +167,8 @@ class Area extends React.Component {
     }
     return arr;
   }
-  mergeSort(){
+  async mergeSort(){
+    await this.setState({isRunning: true});
     //decimate then merge
     var curr_size;
     var left_start;
@@ -208,7 +206,8 @@ class Area extends React.Component {
     arr[high] = t;
     return [(i+1), arr];
   }
-  quickSort(low, high){
+  async quickSort(low, high){
+    await this.setState({isRunning: true});
     var stack = [];
     stack.push(low);
     stack.push(high);
@@ -251,7 +250,8 @@ class Area extends React.Component {
     }
     this.setState({bars: arr});
   }
-  heapSort() {
+  async heapSort() {
+    await this.setState({isRunning: true});
     var arr = this.state.bars.slice();
     var len = arr.length;
     this.makeHeap(arr, len);
@@ -284,7 +284,8 @@ class Area extends React.Component {
       }
     }, 100)
   }
-  bubbleSort() {
+  async bubbleSort() {
+    await this.setState({isRunning: true});
     var swapped = false;
     var i = 0;
     var check_len = this.state.check_len;
