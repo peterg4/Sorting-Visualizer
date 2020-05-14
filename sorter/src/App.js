@@ -28,7 +28,8 @@ class Area extends React.Component {
     this.state = {
       bars: bars,
       length: bars.length,
-      check_len: bars.length
+      check_len: bars.length,
+      isRunning: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -49,6 +50,10 @@ class Area extends React.Component {
     this.clearArray();
   }
   handleChange(event) {
+    console.log(this.state.isRunning);
+    if(this.state.isRunning) {
+      return;
+    }
     this.setState({length: event.target.value});
     numBars = event.target.value;
     numBars++;
@@ -59,16 +64,18 @@ class Area extends React.Component {
     var i = 0;
     var confirm = setInterval(() => {
       var arr = this.state.bars.slice();
-      document.getElementById(i).className = 'bar confirmed'
+      document.getElementById(i).className = 'bar confirmed';
       i++;
       this.setState({bars: arr});
       if( i >= this.state.length){
         clearInterval(confirm);
+        this.setState({isRunning: false});
       }
     }, 700/this.state.length);
   }
-  insertionSort(){
-    //at each element look back through sorted array and place in correct position
+  async insertionSort(){
+    await this.setState({isRunning: true});
+    console.log(this.state.isRunning);
     var i = 1;
     var swapped = false;
     var sort = setInterval(() => {
@@ -95,7 +102,9 @@ class Area extends React.Component {
       }
     }, 5000/this.state.length)
   }
-  selectionSort(){
+  async selectionSort(){
+    await this.setState({isRunning: true});
+    console.log(this.state.isRunning);
     var i = 0;
     var low = 0;
     var sort = setInterval(() => {
