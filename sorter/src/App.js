@@ -332,13 +332,13 @@ class Area extends React.Component {
           {sorts}
         </div>
         <div>
-          <button onClick={()=> this.generateArray()}>New Array</button>
-          <button onClick={()=> this.bubbleSort()}>Bubble Sort</button>
-          <button onClick={()=> this.insertionSort()}>Insertion Sort</button>
-          <button onClick={()=> this.selectionSort()}>Selection Sort</button>
-          <button onClick={()=> this.quickSort(0, this.state.length-1)}>Quick Sort</button>
-          <button onClick={()=> this.heapSort()}>Heap Sort</button>
-          <button onClick={()=> this.mergeSort()}>Merge Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.generateArray()}>New Array</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.bubbleSort()}>Bubble Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.insertionSort()}>Insertion Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.selectionSort()}>Selection Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.quickSort(0, this.state.length-1)}>Quick Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.heapSort()}>Heap Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.mergeSort()}>Merge Sort</button>
           
           <form onSubmit={this.handleSubmit}>
             <input className="slider" type="range" min="2" max="100" step="1" value={this.state.length} onChange={this.handleChange} name="size" />
