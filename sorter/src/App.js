@@ -175,11 +175,11 @@ class Area extends React.Component {
     var n = this.state.length;
     curr_size = 1;
     var arr = this.state.bars.slice();
-    var search = setInterval(() => {
+    var search = setInterval( async () => {
       for(left_start=0; left_start<n-1;left_start+=2*curr_size) {
         var mid = Math.min(left_start + curr_size-1,n-1);
         var right_end = Math.min(left_start+(2*curr_size)-1,n-1);
-        arr = this.merge(arr,left_start,mid,right_end);
+        arr = await this.merge(arr,left_start,mid,right_end);
       }
       this.setState({bars: arr});
       curr_size*=2;
@@ -341,7 +341,7 @@ class Area extends React.Component {
           <button onClick={() => this.state.isRunning ? console.log("running...") : this.mergeSort()}>Merge Sort</button>
           
           <form onSubmit={this.handleSubmit}>
-            <input className="slider" type="range" min="2" max="100" step="1" value={this.state.length} onChange={this.handleChange} name="size" />
+            <input className="slider" type="range" min="2" max={window.innerWidth/2} step="1" value={this.state.length} onChange={this.handleChange} name="size" />
           </form>
         </div>
       </div>
