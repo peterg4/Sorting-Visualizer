@@ -3,15 +3,15 @@ import './App.css';
 
 var numBars = 20;
 var max = 0;
-var offset = window.innerHeight-250;
+var offset = window.innerHeight-100;
 function Bar(props) {
-  var height = {
+  var styles = {
     height: props.value/max*offset,
-    width: 600/numBars,
+    width: window.innerWidth/numBars,
     bottom: -offset + props.value/max*offset,
   }
   return (
-    <div id={props.index} className = {'bar'} style={height}></div>
+    <div id={props.index} className = {'bar'} style={styles}></div>
   );
 }
 

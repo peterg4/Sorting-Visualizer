@@ -9,6 +9,7 @@
   color: white;
 }
 .bar {
+  display: flex;
   position: relative;
   width: 10px;
   margin: 0 1px 0 1px;
@@ -43,11 +44,13 @@ button:focus{
 }
 .sortBoard {
   margin-top: 50px;
+  justify-content: center;
   position: absolute;
+  display: flex;
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  width: fit-content;
+  width: 100%;
 }
 .red { /*always have descriptive variables*/
   background-color: forestgreen!important;
