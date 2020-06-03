@@ -43,10 +43,10 @@ button:focus{
 }
 .sortBoard {
   margin-top: 50px;
-  position: absolute; 
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 25%;
+  bottom: 0;
   width: fit-content;
 }
 .red { /*always have descriptive variables*/
