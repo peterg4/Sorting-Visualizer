@@ -107,7 +107,7 @@ class Area extends React.Component {
     var sort = setInterval(() => {
       this.clearArray();
       var arr = this.state.bars.slice();
-      var min = 1000;
+      var min = Infinity;
       var min_in;
       for(var j = low; j < arr.length; j++) {
        if(arr[j] < min) {
