@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-var numBars = 20;
+var numBars = 300;
 var max = 0;
 var offset = window.innerHeight-100;
 function Bar(props) {
@@ -341,7 +341,7 @@ class Area extends React.Component {
           <button onClick={() => this.state.isRunning ? console.log("running...") : this.mergeSort()}>Merge Sort</button>
           
           <form onSubmit={this.handleSubmit}>
-            <input className="slider" type="range" min="2" max={600} step="1" value={this.state.length} onChange={this.handleChange} name="size" />
+            <input className="slider" type="range" min="10" max={600} step="1" value={this.state.length} onChange={this.handleChange} name="size" />
           </form>
         </div>
       </div>
