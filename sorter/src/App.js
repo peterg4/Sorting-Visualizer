@@ -130,7 +130,7 @@ class Area extends React.Component {
       }
     }, 5000/this.state.length)
   }
-  merge(arr, l, m, r) {
+  async merge(arr, l, m, r) {
     var i,j,k;
     var n1 = m-l+1;
     var n2 = r-m;
@@ -341,7 +341,7 @@ class Area extends React.Component {
           <button onClick={() => this.state.isRunning ? console.log("running...") : this.mergeSort()}>Merge Sort</button>
           
           <form onSubmit={this.handleSubmit}>
-            <input className="slider" type="range" min="2" max={window.innerWidth/2} step="1" value={this.state.length} onChange={this.handleChange} name="size" />
+            <input className="slider" type="range" min="2" max={600} step="1" value={this.state.length} onChange={this.handleChange} name="size" />
           </form>
         </div>
       </div>
