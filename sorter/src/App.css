@@ -88,6 +88,11 @@ button:focus{
     height: 30px;
     margin: 5px;
   }
+  button:hover {
+    box-shadow: none;
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
 }
 
 @media screen and (max-width: 500px) {
