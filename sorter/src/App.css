@@ -89,7 +89,9 @@ button:focus{
     margin: 5px;
   }
   button:hover {
+    color:white;
     box-shadow: none;
+    background-color: #53a7ea;
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
   }
