@@ -313,6 +313,17 @@ class Area extends React.Component {
       }
     }, 100/this.state.length)
   }
+  router(choice){
+    this.generateArray();
+    switch(choice) {
+      case 1: this.bubbleSort(); break
+      case 2: this.insertionSort(); break;
+      case 3: this.selectionSort(); break;
+      case 4: this.quickSort(0, this.state.length-1); break;
+      case 5: this.heapSort(); break;
+      case 6: this.mergeSort(); break;
+    }
+  }
   renderBar(i) {
     return (
       <Bar
@@ -321,24 +332,24 @@ class Area extends React.Component {
       />
     );
   }
-  render() {
+  render() { //0, this.state.length-1
     const sorts = []
     for(var i = 0; i < numBars-1; i++) {
       sorts.push(this.renderBar(i));
     }
     return (
       <div>
-        <div className="sortBoard">
+        <div className="sortBoard"> 
           {sorts}
         </div>
         <div>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.generateArray()}>New Array</button>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.bubbleSort()}>Bubble Sort</button>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.insertionSort()}>Insertion Sort</button>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.selectionSort()}>Selection Sort</button>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.quickSort(0, this.state.length-1)}>Quick Sort</button>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.heapSort()}>Heap Sort</button>
-          <button onClick={() => this.state.isRunning ? console.log("running...") : this.mergeSort()}>Merge Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(0)}>New Array</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(1)}>Bubble Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(2)}>Insertion Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(3)}>Selection Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(4)}>Quick Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(5)}>Heap Sort</button>
+          <button onClick={() => this.state.isRunning ? console.log("running...") : this.router(6)}>Merge Sort</button>
           
           <form onSubmit={this.handleSubmit}>
             <input className="slider" type="range" min="10" max={600} step="1" value={this.state.length} onChange={this.handleChange} name="size" />
